@@ -35,4 +35,26 @@ class CarsController extends Controller
         'name' => $request->name
        ]);
     }
+
+    public function year(){
+        $years = DB::table('cars3')
+            ->select('start_production')
+            ->distinct()
+            ->get();
+            //dd($years[0]->start_production);
+        return view('cars.year',[
+            'years' => $years
+        ]);
+    }
+    public function searchYear(Request $request){
+        $years = DB::table('cars3')
+        ->select('start_production')
+        ->distinct()
+        ->get();
+        //dd($years[0]->start_production);
+        //dd($request);
+    return view('cars.year',[
+        'years' => $years
+    ]);
+    }
 }
