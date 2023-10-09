@@ -40,21 +40,32 @@ class CarsController extends Controller
         $years = DB::table('cars3')
             ->select('start_production')
             ->distinct()
+            ->orderBy('start_production')
             ->get();
             //dd($years[0]->start_production);
+
+        $cars = []; // üres tömb
         return view('cars.year',[
-            'years' => $years
+            'years' => $years,
+            'cars' => $cars
         ]);
     }
     public function searchYear(Request $request){
         $years = DB::table('cars3')
         ->select('start_production')
         ->distinct()
+        ->orderBy('start_production')
         ->get();
         //dd($years[0]->start_production);
         //dd($request);
+
+        $cars = DB::table('cars3')
+            ->where('start_production','=',$request->year)
+            ->get();
+
     return view('cars.year',[
-        'years' => $years
+        'years' => $years,
+        'cars' => $cars
     ]);
     }
 }
